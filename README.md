@@ -10,18 +10,18 @@ $ git init
 $ git remote add ENTREVOISIN https://github.com/Damien-PULP/MaR-u-Projet4-OCR.git
 $ git clone https://github.com/Damien-PULP/MaR-u-Projet4-OCR.git
 ```
-![alt text](P3_screenshot/1_downloadProject_gitBash.png)
+![alt text](P4_screenshot/1_downloadProject_gitBash.png)
 ### Use download ZIP
 - Download the github project on "Download zip"
 - Unzip the folder.
 ## 2. Open the project
 ### Open Android studio
-![alt text](P3_screenshot/2_Open_project-1.jpg)
+![alt text](P4_screenshot/2_Open_project-1.jpg)
 ### Select the path of project of the depot
-![alt text](P3_screenshot/2_Open_project-2.png)
+![alt text](P4_screenshot/2_Open_project-2.png)
 ## 3. Build and Run
 1. Select 'app'
 2. Select a emulator 
 3. Press the green triangle for Run
-![alt text](P3_screenshot/3_Build_and_run.png)
+![alt text](P4_screenshot/3_Build_and_run.png)
 ## The app will launched
