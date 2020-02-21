@@ -1,0 +1,5 @@
+<resources>
+   <!-- Floating Action Button dimen -->
+    <dimen name="margin_floatingActionButton">16dp</dimen>
+    <dimen name="padding_floatingActionButton">10dp</dimen>
+</resources>
