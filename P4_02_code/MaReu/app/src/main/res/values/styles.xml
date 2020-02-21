@@ -10,7 +10,22 @@
 
     <style name="FloatingActionButton">
 
-        <item name="android:background">#C53232</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@color/colorAccent</item>
         <item name="android:elevation">5dp</item>
+    </style>
+
+
+    <!-- TOOLBAR THEME -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Color of the title text in the Toolbar -->
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <!-- TOOLBAR TITLE THEME -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">italic</item>
     </style>
 </resources>
