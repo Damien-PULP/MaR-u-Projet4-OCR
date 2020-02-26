@@ -6,4 +6,5 @@
     <dimen name="toolbar_height">50dp</dimen>
     <!-- Item Meeting -->
     <dimen name="size_icon_meeting_item">50dp</dimen>
+    <dimen name="margin_left_metting_item">24dp</dimen>
 </resources>
