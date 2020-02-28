@@ -110,12 +110,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.option_1_filter:
             // Set the text to bold style
                 item.setChecked(true);
+                mApiService.getListWithFilterHour();
+                mAdaptor.notifyDataSetChanged();
             Log.d("MainActivity", "1 selected");
-
+            break;
             case R.id.option_2_filter:
                 // Set the text to bold style
+                mApiService.getListWithFilterPlace();
+                mAdaptor.notifyDataSetChanged();
                 item.setChecked(true);
                 Log.d("MainActivity", "2 selected");
+                break;
         }
     }
 }

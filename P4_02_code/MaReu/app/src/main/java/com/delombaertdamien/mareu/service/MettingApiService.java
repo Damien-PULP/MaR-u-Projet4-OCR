@@ -9,4 +9,6 @@ public interface MettingApiService {
     List<Metting> getMettings();
     void addMetting();
     void removeMetting(Metting metting);
+    void getListWithFilterPlace ();
+    void getListWithFilterHour ();
 }
