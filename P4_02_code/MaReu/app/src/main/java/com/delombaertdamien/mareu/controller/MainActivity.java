@@ -11,6 +11,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.delombaertdamien.mareu.DI.DI;
@@ -64,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             mApiService.addMetting();
-            Init();
+            mMettings = mApiService.getMettings();
+            mAdaptor.notifyItemInserted(mMettings.size());
             }
         });
     }
@@ -81,8 +83,39 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            // Handle the non group menu items here
+            case R.id.option_1_filter:
+                // Set the text to bold style
+                Log.d("MainActivity", "1 selected");
+                return true;
+            case R.id.option_2_filter:
+                // Set the text to bold style
+                Log.d("MainActivity", "2 selected");
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    public void onOptionFilterListItemClick (MenuItem item){
+
+        switch (item.getItemId()){
+            case R.id.option_1_filter:
+            // Set the text to bold style
+                item.setChecked(true);
+            Log.d("MainActivity", "1 selected");
+
+            case R.id.option_2_filter:
+                // Set the text to bold style
+                item.setChecked(true);
+                Log.d("MainActivity", "2 selected");
+        }
     }
 }

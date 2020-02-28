@@ -7,5 +7,24 @@
         android:icon="@drawable/ic_filter_list_white_24dp"
         android:orderInCategory="2"
         android:title="filter"
-        app:showAsAction="always|withText" />
+        app:showAsAction="always|withText">
+
+        <menu>
+
+            <group
+                android:id="@+id/option_filter_list_metting"
+                android:checkableBehavior="single"
+                >
+
+                <item
+                    android:id="@+id/option_1_filter"
+                    android:onClick="onOptionFilterListItemClick"
+                    android:title="Par heure"/>
+                <item
+                    android:id="@+id/option_2_filter"
+                    android:onClick="onOptionFilterListItemClick"
+                    android:title="Par local"/>
+            </group>
+        </menu>
+    </item>
 </menu>

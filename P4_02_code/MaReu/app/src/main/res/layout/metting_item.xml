@@ -9,36 +9,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/item_metting_list_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/circle_24dp"
+        app:civ_border_color="#3f51b5"
+        app:civ_border_width="3dp"
+        app:civ_shadow="true"
+        app:civ_shadow_radius="2dp"
+        app:civ_shadow_color="#3f51b5"/>
 
     <TextView
         android:id="@+id/item_metting_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_left_metting_item"
+        android:layout_marginStart="10dp"
         android:textStyle="bold"
+        android:textColor="#050505"
         android:text="NOM DE LA REUNION"
         app:layout_constraintBottom_toBottomOf="@+id/item_metting_list_icon"
         app:layout_constraintStart_toEndOf="@+id/item_metting_list_icon"
-        app:layout_constraintTop_toTopOf="@+id/item_metting_list_icon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_metting_list_name_participant"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="List des personne"
         android:layout_marginStart="@dimen/margin_left_metting_item"
+        android:layout_marginEnd="50dp"
         app:layout_constraintTop_toBottomOf="@id/item_metting_list_name"
-        app:layout_constraintStart_toEndOf="@+id/item_metting_list_icon"/>
+        app:layout_constraintStart_toEndOf="@+id/item_metting_list_icon"
+        />
 
     <ImageButton
         android:id="@+id/item_metting_list_delete_button"
