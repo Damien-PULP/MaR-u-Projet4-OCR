@@ -2,6 +2,7 @@ package com.delombaertdamien.mareu.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.delombaertdamien.mareu.model.Metting;
 import com.delombaertdamien.mareu.service.MettingApiService;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -52,10 +55,17 @@ public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
         Metting metting = DI.getMettingApiService().getMettings().get(position);
 
         holder.imgIcon.setColorFilter(getRandomColor());
-        String stringHour = String.format("%.0f", metting.getHourOfMetting());
+
+        String hourDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT).format(metting.getHourOfMetting());;
+        Log.d("ItemAdaptor", "hour :" + hourDateFormat);
+
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        nf.setParseIntegerOnly(true);
+
+        String stringHour =  String.format("%.0f",metting.getHourOfMetting());
         String stringMin = String.format("%.0f",(metting.getHourOfMetting() - (Float.parseFloat(stringHour))) * 60);
 
-        holder.textNameMetting.setText(metting.getSubject() + " - Local " + metting.getPlace() + " - " + stringHour + "H" + stringMin);
+        holder.textNameMetting.setText("Local " + metting.getPlace() + " - " + metting.getHourOfMetting() + "H - " + metting.getSubject());
         holder.textNameParticipant.setText("");
         for (int i = 0; i < metting.getContributors().size(); i++) {
             holder.textNameParticipant.setText(holder.textNameParticipant.getText() + " " + metting.getContributors().get(i));

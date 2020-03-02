@@ -68,4 +68,42 @@ abstract class DummyMettingApiServiceGenerator {
         }
         return contributors;
     }
+
+    static Metting getMettingRandomAI (List<Metting> mettings){
+
+        String Place = getPlaceRandom();
+        Float hour = getHourOfFilter(FilterOfThePlace(mettings, Place));
+        String subject = getSubjectRandom();
+        List<String> contributor = getContributorRandom();
+
+        return new Metting(mettings.size(), subject, contributor, hour, Place);
+    }
+
+    static List<Float> FilterOfThePlace (List<Metting> mettings, String place){
+
+        List<Float> listSorted = new ArrayList<>();
+
+        for(int i = 0; i < mettings.size(); i++){
+            if(mettings.get(i).getPlace().equals(place)){
+                listSorted.add(mettings.get(i).getHourOfMetting());
+            }
+        }
+        return listSorted;
+    }
+    static Float getHourOfFilter (List<Float> listHourUsed){
+
+        Random rdm = new Random();
+        float hourRandom = 7f + (rdm.nextFloat() * ( 19f- 7f));
+
+        for(int i = 0; i < listHourUsed.size(); i++){
+            while (listHourUsed.get(i) + 0.75 >= hourRandom && listHourUsed.get(i) <= hourRandom){
+                hourRandom = 7f + (rdm.nextFloat() * ( 19f- 7f));
+            }
+        }
+        String hourString = String.format("%.2f", hourRandom);
+        float mHourFloat = Float.parseFloat(hourString);
+
+        return mHourFloat;
+
+    }
 }

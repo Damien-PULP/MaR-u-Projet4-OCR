@@ -20,7 +20,7 @@ public class DummyMettingApiService implements MettingApiService {
 
     @Override
     public void addMetting() {
-    mettings.add(DummyMettingApiServiceGenerator.getMettingRandom(mettings));
+    mettings.add(DummyMettingApiServiceGenerator.getMettingRandomAI(mettings));
     }
 
     @Override

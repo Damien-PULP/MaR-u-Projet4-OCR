@@ -20,7 +20,7 @@
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Color of the title text in the Toolbar -->
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textColor">@color/color_text_title</item>
     </style>
 
     <!-- TOOLBAR TITLE THEME -->
