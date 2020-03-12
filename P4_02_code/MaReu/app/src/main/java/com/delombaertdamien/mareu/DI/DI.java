@@ -1,26 +1,26 @@
 package com.delombaertdamien.mareu.DI;
 
-import com.delombaertdamien.mareu.service.DummyMettingApiService;
-import com.delombaertdamien.mareu.service.MettingApiService;
+import com.delombaertdamien.mareu.service.DummyMeetingApiService;
+import com.delombaertdamien.mareu.service.MeetingApiService;
 
 public class DI {
 
-        private static MettingApiService service = new DummyMettingApiService();
+        private static MeetingApiService service = new DummyMeetingApiService();
 
         /**
-         * Get an instance on @{@link MettingApiService}
+         * Get an instance on @{@link MeetingApiService}
          * @return
          */
-        public static MettingApiService getMettingApiService() {
+        public static MeetingApiService getMettingApiService() {
             return service;
         }
 
         /**
-         * Get always a new instance on @{@link MettingApiService}. Useful for tests, so we ensure the context is clean.
+         * Get always a new instance on @{@link MeetingApiService}. Useful for tests, so we ensure the context is clean.
          * @return
          */
-        public static MettingApiService getNewInstanceApiService() {
-            return new DummyMettingApiService();
+        public static MeetingApiService getNewInstanceApiService() {
+            return new DummyMeetingApiService();
         }
     }
 

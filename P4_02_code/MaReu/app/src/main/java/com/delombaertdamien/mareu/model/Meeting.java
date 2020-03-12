@@ -2,19 +2,19 @@ package com.delombaertdamien.mareu.model;
 
 import java.util.List;
 
-public class Metting {
+public class Meeting {
 
     private Integer id;
     private String subject;
     private List<String> contributors;
-    private float hourOfMetting;
+    private float hourOfMeeting;
     private String place;
 
-    public Metting(Integer id, String subject, List<String> contributors, float hourOfMetting, String place) {
+    public Meeting(Integer id, String subject, List<String> contributors, float hourOfMeeting, String place) {
         this.id = id;
         this.subject = subject;
         this.contributors = contributors;
-        this.hourOfMetting = hourOfMetting;
+        this.hourOfMeeting = hourOfMeeting;
         this.place = place;
     }
 
@@ -42,12 +42,12 @@ public class Metting {
         this.contributors = contributors;
     }
 
-    public float getHourOfMetting() {
-        return hourOfMetting;
+    public float getHourOfMeeting() {
+        return hourOfMeeting;
     }
 
-    public void setHourOfMetting(float hourOfMetting) {
-        this.hourOfMetting = hourOfMetting;
+    public void setHourOfMeeting(float hourOfMeeting) {
+        this.hourOfMeeting = hourOfMeeting;
     }
 
     public String getPlace() {

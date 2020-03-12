@@ -1,13 +1,10 @@
 package com.delombaertdamien.mareu.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.SearchManager;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,8 +13,8 @@ import android.view.View;
 
 import com.delombaertdamien.mareu.DI.DI;
 import com.delombaertdamien.mareu.R;
-import com.delombaertdamien.mareu.model.Metting;
-import com.delombaertdamien.mareu.service.MettingApiService;
+import com.delombaertdamien.mareu.model.Meeting;
+import com.delombaertdamien.mareu.service.MeetingApiService;
 import com.delombaertdamien.mareu.view.AdaptorListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.list_metting_main_activity)
     RecyclerView mRecyclerView;
 
-    MettingApiService mApiService;
-    private List<Metting> mMettings;
+    MeetingApiService mApiService;
+    private List<Meeting> mMeetings;
     private AdaptorListView mAdaptor;
 
     @Override
@@ -60,21 +57,26 @@ public class MainActivity extends AppCompatActivity {
 
 
         Init();
-
+        mAdaptor.notifyDataSetChanged();
         mFabAddMetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            mApiService.addMetting();
-            mMettings = mApiService.getMettings();
-            mAdaptor.notifyItemInserted(mMettings.size());
+
+                Intent intent = new Intent(MainActivity.this, ConfigureMeetingActivity.class);
+                startActivity(intent);
+                /**
+            mApiService.AddMeeting();
+            mMeetings = mApiService.getMeetings();
+            mAdaptor.notifyItemInserted(mMeetings.size());
+                 */
             }
         });
     }
 
     private void Init(){
-        mMettings = mApiService.getMettings();
-
-        mAdaptor = new AdaptorListView(mMettings, this);
+        mMeetings = mApiService.getMeetings();
+        Log.d("MainActivity","Size Of mMeetings : " + mMeetings.size());
+        mAdaptor = new AdaptorListView(mMeetings, this);
         mRecyclerView.setAdapter(mAdaptor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

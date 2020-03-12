@@ -6,18 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.delombaertdamien.mareu.DI.DI;
 import com.delombaertdamien.mareu.R;
-import com.delombaertdamien.mareu.model.Metting;
-import com.delombaertdamien.mareu.service.MettingApiService;
+import com.delombaertdamien.mareu.model.Meeting;
+import com.delombaertdamien.mareu.service.MeetingApiService;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.text.DateFormat;
@@ -30,12 +27,12 @@ import butterknife.ButterKnife;
 
 public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
 
-    private final List<Metting> mMettings;
+    private final List<Meeting> mMeetings;
     private Context mContext;
-    private MettingApiService mApiService;
+    private MeetingApiService mApiService;
 
-    public AdaptorListView(List<Metting> items, Context context) {
-        mMettings = items;
+    public AdaptorListView(List<Meeting> items, Context context) {
+        mMeetings = items;
         mContext = context;
     }
 
@@ -52,23 +49,25 @@ public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Metting metting = DI.getMettingApiService().getMettings().get(position);
+        Meeting mMeeting = DI.getMettingApiService().getMeetings().get(position);
 
-        holder.imgIcon.setColorFilter(getRandomColor());
+        holder.imgIcon.setColorFilter(mMeeting.getId());
 
-        String hourDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT).format(metting.getHourOfMetting());;
+        String hourDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT).format(mMeeting.getHourOfMeeting());;
         Log.d("ItemAdaptor", "hour :" + hourDateFormat);
 
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setParseIntegerOnly(true);
 
-        String stringHour =  String.format("%.0f",metting.getHourOfMetting());
-        String stringMin = String.format("%.0f",(metting.getHourOfMetting() - (Float.parseFloat(stringHour))) * 60);
+        String stringHour =  String.format("%.0f", mMeeting.getHourOfMeeting());
+        String stringMin = String.format("%.0f",(mMeeting.getHourOfMeeting() - (Float.parseFloat(stringHour))) * 60);
 
-        holder.textNameMetting.setText("Local " + metting.getPlace() + " - " + metting.getHourOfMetting() + "H - " + metting.getSubject());
+        String timeOfMeeting = stringHour + " H " + stringMin;
+
+        holder.textNameMetting.setText("Local " + mMeeting.getPlace() + " - " + mMeeting.getHourOfMeeting() + " H - " + mMeeting.getSubject());
         holder.textNameParticipant.setText("");
-        for (int i = 0; i < metting.getContributors().size(); i++) {
-            holder.textNameParticipant.setText(holder.textNameParticipant.getText() + " " + metting.getContributors().get(i));
+        for (int i = 0; i < mMeeting.getContributors().size(); i++) {
+            holder.textNameParticipant.setText(holder.textNameParticipant.getText() + " " + mMeeting.getContributors().get(i));
         }
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +75,7 @@ public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
                 //notifyItemRemoved(position);
                 /** Problem color changed --> re-init list*/
                 notifyDataSetChanged();
-                mApiService.removeMetting(metting);
+                mApiService.removeMeeting(mMeeting);
 
             }
         });
@@ -86,13 +85,9 @@ public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mMettings.size();
+        return mMeetings.size();
     }
 
-    public int getRandomColor() {
-        Random rnd = new Random();
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-    }
 }
 
 class ViewHolder extends RecyclerView.ViewHolder{

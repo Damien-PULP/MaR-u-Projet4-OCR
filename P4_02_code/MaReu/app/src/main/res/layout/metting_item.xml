@@ -31,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_metting_item"
+        android:textSize="@dimen/size_text_normal"
         android:textStyle="bold"
         android:textColor="@color/color_text_normal"
         android:text="NOM DE LA REUNION"
@@ -40,15 +41,19 @@
 
     <TextView
         android:id="@+id/item_metting_list_name_participant"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="List des personne"
+        android:layout_marginStart="@dimen/margin_metting_item"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="collaborators ..."
         android:textColor="@color/color_text_under"
-        android:layout_marginStart="@dimen/margin_start_text_metting_item"
-        android:layout_marginEnd="@dimen/margin_end_text_metting_item"
-        app:layout_constraintTop_toBottomOf="@id/item_metting_list_name"
+        android:textSize="@dimen/size_text_normal"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_metting_list_icon"
-        />
+        app:layout_constraintTop_toBottomOf="@id/item_metting_list_name" />
 
     <ImageButton
         android:id="@+id/item_metting_list_delete_button"

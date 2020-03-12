@@ -11,8 +11,4 @@
     <dimen name="margin_metting_item">16dp</dimen>
     <dimen name="border_circle_metting_item">3dp</dimen>
     <dimen name="shadow_radius_metting_item">2dp</dimen>
-    <dimen name="size_text_normal">16sp</dimen>
-    <dimen name="size_text_under">12sp</dimen>
-    <dimen name="padding_vertical_shape">13dp</dimen>
- <dimen name="padding_vertical_spinner">25dp</dimen>
 </resources>
