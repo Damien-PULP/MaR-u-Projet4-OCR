@@ -43,10 +43,4 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:layout_margin">@dimen/text_margin</item>
     </style>
-    <style name="style_text_subTitle_detail">
-
-        <item name="android:textSize">@dimen/size_text_normal</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-
-    </style>
 </resources>

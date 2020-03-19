@@ -1,5 +1,6 @@
 package com.delombaertdamien.mareu.controller;
 
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import com.delombaertdamien.mareu.view.NonScrollListView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.util.Log;
 import android.view.Menu;
@@ -25,32 +27,64 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.delombaertdamien.mareu.R;
-import com.google.android.material.snackbar.Snackbar;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
-public class ConfigureMeetingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private EditText mTextSubject;
-    private EditText mTextContributor;
-    private NonScrollListView mListContributor;
-    private Button mButtonValidContributor;
-    private Spinner mSpinnerPlace;
-    private TimePicker mTimePicker;
-    private Button mButtonValidMeeting;
+public class ConfigureMeetingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
+
+    //UI Components
+    @BindView(R.id.configure_activity_edit_text_subject)
+    EditText mTextSubject;
+    @BindView(R.id.configure_activity_edit_text_contributor)
+    EditText mTextContributor;
+    @BindView(R.id.configure_activity_list_contributor)
+    NonScrollListView mListContributor;
+    @BindView(R.id.configure_activity_button_valid_contributor)
+    Button mButtonValidContributor;
+    @BindView(R.id.configure_activity_spinner_place)
+    Spinner mSpinnerPlace;
+    @BindView(R.id.configure_activity_button_set_start_clock)
+    Button mButtonStartSetClock;
+    @BindView(R.id.configure_activity_button_set_end_clock)
+    Button mButtonEndSetClock;
+    @BindView(R.id.configure_activity_edit_text_valid_meeting)
+    Button mButtonValidMeeting;
 
     private List<String> contributors = new ArrayList<>();
+
     private String placeSelected;
+    private Calendar mStartHour;
+    private Calendar mEndHour;
+
+    private boolean isStartHour = true;
 
     private MeetingApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configure_meeting);
+
+        ButterKnife.bind(this);
+
         mApiService = DI.getMettingApiService();
+
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+
+        mStartHour = format.getCalendar();
+        mEndHour = format.getCalendar();
         configureUI();
 
     }
@@ -59,60 +93,61 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mTextSubject = findViewById(R.id.configure_activity_edit_text_subject);
-        mTextContributor = findViewById(R.id.configure_activity_edit_text_contributor);
-        mButtonValidContributor = findViewById(R.id.configure_activity_button_valid_contributor);
-        mSpinnerPlace = findViewById(R.id.configure_activity_spinner_place);
-        /** Duty Fixed*/
-        mTimePicker = findViewById(R.id.configure_activity_time_picker_hour);
-        mTimePicker.setIs24HourView(true);
+        // Adaptor NonScrollListView email contributor
+        AdaptorNonScrollListView adaptor = new AdaptorNonScrollListView(this, contributors, this);
+        mListContributor.setAdapter(adaptor);
 
-        mButtonValidMeeting = findViewById(R.id.configure_activity_edit_text_valid_meeting);
-
-        mListContributor = findViewById(R.id.configure_activity_list_contributor);
-        refreshUIListContributor();
-
-        // Creating adapter for spinner
-        /** Duty Fixed*/
-        refreshUISpinnerPlace();
+        refreshUISpinnerPlace(16f);
 
         /** Duty Fixed*/
-        mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
+        mButtonStartSetClock.setOnClickListener(view -> {
+            isStartHour = true;
+            DialogFragment fragmentClock = new TimePickerFragment();
+            fragmentClock.show(getSupportFragmentManager(), "start time picker");
+        });
+        mButtonEndSetClock.setOnClickListener(view -> {
+            isStartHour = false;
+            DialogFragment fragmentClock = new TimePickerFragment();
+            fragmentClock.show(getSupportFragmentManager(), "end time picker");
+        });
 
-               refreshUISpinnerPlace();
+        mButtonValidContributor.setOnClickListener(view -> {
+            String value = mTextContributor.getText().toString();
+            if(!value.equals("") && value.endsWith("@lamzlo.com")){
+                contributors.add(value);
+                ((AdaptorNonScrollListView)mListContributor.getAdapter()).notifyDataSetChanged();
+
+                mTextContributor.setText("@lamzlo.com");
+            }else{
+                showAlertWithMsg("L'adresse email doit se terminer par @lamzlo.com");
             }
         });
 
-        mButtonValidContributor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String value = mTextContributor.getText().toString();
-                if(!value.equals("") && value.endsWith("@lamzlo.com")){
-                    contributors.add(value);
-                    refreshUIListContributor();
-                    mTextContributor.setText("@lamzlo.com");
-                }else{
-                    showAlertWithMsg("L'adresse email doit se terminer par @lamzlo.com");
-                    //Snackbar.make(view, R.string.msg_snackbar_email_adv, Snackbar.LENGTH_LONG ).setAction("Action", null).show();
-                }
-            }
-        });
-        /** Duty Fixed*/
-        mButtonValidMeeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                validMeeting();
-            }
-        });
+        mButtonValidMeeting.setOnClickListener(view -> validMeeting());
     }
+    private void refreshUISpinnerPlace (float hour){
+
+        float f1 = mStartHour.get(Calendar.HOUR) + mStartHour.get(Calendar.MINUTE);
+        float f2 = mEndHour.get(Calendar.HOUR) + mEndHour.get(Calendar.MINUTE);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mApiService.getListPlaceAvailable(f1, f2));
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        mSpinnerPlace.setAdapter(adapter);
+        mSpinnerPlace.setOnItemSelectedListener(this);
+    }
+
+    public void removeAnContributor (String contributor){
+        contributors.remove(contributor);
+        ((AdaptorNonScrollListView)mListContributor.getAdapter()).notifyDataSetChanged();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_configure_meeting, menu);
-        // Associate searchable configuration with the SearchView
         return true;
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
         String itemSelected = parent.getItemAtPosition(position).toString();
@@ -121,43 +156,6 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //DO NOTHING
-    }
-
-    private void validMeeting (){
-        String subject = mTextSubject.getText().toString();
-        if(!subject.equals("") && contributors.size() > 0 && !placeSelected.equals("")){
-            mApiService.addMeeting(getRandomColor(),subject, placeSelected, contributors, mTimePicker.getHour(), mTimePicker.getMinute());
-            Log.d("ConfigureActivity","Size Of mMettings : " + mApiService.getMeetings().size());
-            Intent mIntent = new Intent(ConfigureMeetingActivity.this, MainActivity.class);
-            startActivity(mIntent);
-        }else{
-            showAlertWithMsg("Veuillez remplir tout les champs !");
-            //Snackbar.make(this.findViewById(android.R.id.content) , "Veuillez remplir tout les champs !", Snackbar.LENGTH_LONG ).setAction("Action", null).show();
-        }
-    }
-
-    private void refreshUIListContributor (){
-        AdaptorNonScrollListView adaptor = new AdaptorNonScrollListView(this, contributors, this);
-        mListContributor.setAdapter(adaptor);
-    }
-    private void refreshUISpinnerPlace (){
-
-        float hour = (float)(mTimePicker.getHour() + ( mTimePicker.getMinute() /60f));
-        Log.d("ConfigureMeeting", "The hour is : " + hour);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mApiService.getListPlaceAvailable(hour));
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        mSpinnerPlace.setAdapter(adapter);
-        mSpinnerPlace.setOnItemSelectedListener(this);
-    }
-    public void removeAnContributor ( String contributor){
-        contributors.remove(contributor);
-        refreshUIListContributor();
-    }
-    public int getRandomColor() {
-        Random rnd = new Random();
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
     @Override
@@ -185,13 +183,11 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
     }
 
     private void showAlertWithMsg (String msg){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
 
-        //set title
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
         alertDialogBuilder.setTitle("Erreur");
 
-        //set dialog message
         alertDialogBuilder
                 .setMessage(msg)
                 .setCancelable(false)
@@ -201,10 +197,83 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
                     }
                 });
 
-        //create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
 
-        //show it
         alertDialog.show();
     }
+    public int getRandomColor() {
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+    private void validMeeting (){
+
+        String subject = mTextSubject.getText().toString();
+        if(!subject.equals("") && contributors.size() > 0 && !placeSelected.equals("")){
+
+            mApiService.addMeeting(getRandomColor(),subject, placeSelected, contributors, mStartHour,  mStartHour);
+
+            Intent mIntent = new Intent(ConfigureMeetingActivity.this, MainActivity.class);
+            startActivity(mIntent);
+        }else{
+            showAlertWithMsg("Veuillez remplir tout les champs !");
+        }
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int min) {
+
+        /**SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
+
+        Calendar date = Calendar.getInstance();
+        date.clear();
+        date.set(Calendar.HOUR, hour);
+        date.set(Calendar.MINUTE, min);*/
+
+       //Date dateShow = null;
+        //dateShow = displayFormat.parse()
+        if(isStartHour) {
+            //TODO FIX ME
+            //mStartHour = date;
+
+            mStartHour.set(Calendar.HOUR, hour);
+            mStartHour.set(Calendar.MINUTE, min);
+            float time = hour + (min / 60);
+            refreshUISpinnerPlace(time);
+
+            if(mButtonEndSetClock.getText().equals("définir l'heure de fin")){
+
+                Log.d("Configure", "Heure avant : " + hour + " H " + min);
+                Log.d("Configure", "Calendar Start avant : " + mStartHour.get(Calendar.HOUR) + " H " + mStartHour.get(Calendar.MINUTE));
+                int hourEnd = hour;
+                int minEnd = min;
+
+                if(min >= 15){
+                    hourEnd  += 1;
+                    minEnd -= - 15;
+                }else{
+                     hourEnd = hour;
+                     minEnd += 45;
+                }
+                //TODO FIX ME
+
+                // TODO : change hour of start !!!
+                mEndHour.set(Calendar.HOUR, hourEnd);
+                mEndHour.set(Calendar.MINUTE, minEnd);
+
+                Log.d("Configure", "Heure apres : " + hour + " H " + min);
+                Log.d("Configure", "Calendar Start apres : " + mStartHour.get(Calendar.HOUR) + " H " + mStartHour.get(Calendar.MINUTE));
+                mButtonEndSetClock.setText("La réunion ce termine à " + mEndHour.get(Calendar.HOUR) + "H" + mEndHour.get(Calendar.MINUTE));
+            }
+            mButtonStartSetClock.setText("La réunion commence à " + mStartHour.get(Calendar.HOUR) + "H" + mStartHour.get(Calendar.MINUTE) );
+        }else{
+            //TODO FIX ME
+            mEndHour.set(Calendar.HOUR, hour);
+            mEndHour.set(Calendar.MINUTE, min);
+            mButtonEndSetClock.setText("La réunion ce termine à " + mEndHour.get(Calendar.HOUR) + "H" + mEndHour.get(Calendar.MINUTE));
+        }
+
+    }
+
+
 }

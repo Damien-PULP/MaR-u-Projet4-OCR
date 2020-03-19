@@ -50,7 +50,7 @@ public class MainActivityTest {
                         childAtPosition(
                                 allOf(withId(R.id.item),
                                         childAtPosition(
-                                                withId(R.id.list_metting_main_activity),
+                                                withId(R.id.list_meeting_main_activity),
                                                 0)),
                                 3),
                         isDisplayed()));
@@ -61,7 +61,7 @@ public class MainActivityTest {
                         childAtPosition(
                                 allOf(withId(R.id.item),
                                         childAtPosition(
-                                                withId(R.id.list_metting_main_activity),
+                                                withId(R.id.list_meeting_main_activity),
                                                 0)),
                                 3),
                         isDisplayed()));

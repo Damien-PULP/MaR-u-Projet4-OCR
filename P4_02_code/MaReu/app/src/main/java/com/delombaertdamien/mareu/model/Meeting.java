@@ -1,5 +1,6 @@
 package com.delombaertdamien.mareu.model;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class Meeting {
@@ -7,14 +8,16 @@ public class Meeting {
     private Integer id;
     private String subject;
     private List<String> contributors;
-    private float hourOfMeeting;
+    private Calendar startHourOfMeeting;
+    private Calendar endHourOfMeeting;
     private String place;
 
-    public Meeting(Integer id, String subject, List<String> contributors, float hourOfMeeting, String place) {
+    public Meeting(Integer id, String subject, List<String> contributors, Calendar hourOfMeeting, Calendar endHour, String place) {
         this.id = id;
         this.subject = subject;
         this.contributors = contributors;
-        this.hourOfMeeting = hourOfMeeting;
+        this.startHourOfMeeting = hourOfMeeting;
+        this.endHourOfMeeting = endHour;
         this.place = place;
     }
 
@@ -42,12 +45,11 @@ public class Meeting {
         this.contributors = contributors;
     }
 
-    public float getHourOfMeeting() {
-        return hourOfMeeting;
+    public Calendar getStartHourOfMeeting() {
+        return startHourOfMeeting;
     }
-
-    public void setHourOfMeeting(float hourOfMeeting) {
-        this.hourOfMeeting = hourOfMeeting;
+    public Calendar getEndHourOfMeeting(){
+        return endHourOfMeeting;
     }
 
     public String getPlace() {

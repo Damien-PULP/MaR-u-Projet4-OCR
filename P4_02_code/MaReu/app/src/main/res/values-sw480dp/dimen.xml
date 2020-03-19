@@ -19,7 +19,7 @@
 
  <dimen name="size_icon_add_contributor">50dp</dimen>
 
- <dimen name="size_text_title">25dp</dimen>
+ <dimen name="size_text_title">15dp</dimen>
 
  <dimen name="height_button_valid_meeting">150dp</dimen>
  <dimen name="margin_end_button_add_contributor">8dp</dimen>

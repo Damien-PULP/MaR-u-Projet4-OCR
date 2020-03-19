@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:clickable="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:focusable="true">
 
 
     <com.mikhaellopez.circularimageview.CircularImageView
@@ -19,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/circle_24dp"
+        android:src="@drawable/circle_12dp"
         app:civ_border_color="@color/color_border"
         app:civ_border_width="@dimen/border_circle_metting_item"
         app:civ_shadow="true"
@@ -61,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_metting_item"
         android:background="@null"
+        android:contentDescription="delete"
         app:layout_constraintBottom_toBottomOf="@+id/item_metting_list_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/item_metting_list_name"

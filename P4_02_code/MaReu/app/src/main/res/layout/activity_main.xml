@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".controller.MainActivity">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <androidx.core.widget.NestedScrollView
 
@@ -14,7 +19,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_metting_main_activity"
+            android:id="@+id/list_meeting_main_activity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/metting_item"
@@ -28,10 +33,9 @@
         style="@style/FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/margin_floatingActionButton"
-        android:padding="@dimen/padding_floatingActionButton"
         android:background="@null"
-        app:srcCompat="@drawable/ic_add_white_24dp"
-        />
+        android:padding="@dimen/padding_floatingActionButton"
+        app:srcCompat="@drawable/ic_add_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

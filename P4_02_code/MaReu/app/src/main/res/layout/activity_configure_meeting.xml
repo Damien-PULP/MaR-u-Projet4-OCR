@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_with_border"
+                android:textSize="@dimen/size_text_normal"
                 android:hint="sujet ..."
                 android:padding="@dimen/padding_vertical_shape" />
 
@@ -52,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:hint="email@lamzlo.com"
                     android:inputType="textWebEmailAddress"
+                    android:textSize="@dimen/size_text_normal"
                     android:padding="@dimen/padding_vertical_shape"
                     app:layout_constraintEnd_toStartOf="@id/configure_activity_button_valid_contributor"
                     app:layout_constraintStart_toStartOf="parent"
@@ -59,10 +61,10 @@
 
                 <Button
                     android:id="@+id/configure_activity_button_valid_contributor"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/ic_person_add_black_24dp"
+                    android:layout_width="@dimen/size_icon_add_contributor"
+                    android:layout_height="@dimen/size_icon_add_contributor"
+                    android:layout_marginEnd="@dimen/margin_end_button_add_contributor"
+                    android:background="@drawable/ic_person_add_black_12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/configure_activity_edit_text_contributor"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -99,23 +101,37 @@
                 android:layout_height="wrap_content"
                 android:text="Heure de début" />
 
-            <TimePicker
+            <Button
+                android:textSize="@dimen/size_text_normal"
+                android:id="@+id/configure_activity_button_set_start_clock"
+                android:text="définir l'heure de début"
+                android:background="@drawable/shape_with_border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
+            <TextView
+                style="@style/style_text_subTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:headerBackground="@color/colorPrimaryDark"
-                android:numbersSelectorColor="@color/colorPrimaryDark"
-                android:id="@+id/configure_activity_time_picker_hour"/>
+                android:text="Heure de début" />
+
+            <Button
+                android:textSize="@dimen/size_text_normal"
+                android:id="@+id/configure_activity_button_set_end_clock"
+                android:text="définir l'heure de fin"
+                android:background="@drawable/shape_with_border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/configure_activity_edit_text_valid_meeting"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/height_button_valid_meeting"
                 android:background="@color/colorPrimaryDark"
                 android:text="AJOUTER"
                 android:textColor="@color/color_text_title"
                 android:textStyle="bold"
-                android:textSize="30sp"/>
+                android:textSize="@dimen/size_text_title"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
