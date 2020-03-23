@@ -15,6 +15,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
 
     private List<Meeting> meetings = new ArrayList<>();
+    private Meeting meetingToDisplay;
 
     @Override
     public List<Meeting> getMeetings() {
@@ -27,6 +28,17 @@ public class DummyMeetingApiService implements MeetingApiService {
         Meeting meeting = new Meeting(id, subject, contributors, startHour, endHour, place);
 
         meetings.add(meeting);
+    }
+
+    @Override
+    public Meeting getMeetingWithHashCode(Object obj) {
+
+        for(int i = 0; i < meetings.size(); i++){
+            if(meetings.get(i).hashCode() == obj.hashCode()){
+                return meetings.get(i);
+            }
+        }
+        return null;
     }
 
     @Override
@@ -45,30 +57,28 @@ public class DummyMeetingApiService implements MeetingApiService {
         Collections.sort(meetings, (t0, t1) -> {
 
             Calendar cal1 = t0.getStartHourOfMeeting();
-            Calendar cal2 = t1.getEndHourOfMeeting();
+            Calendar cal2 = t1.getStartHourOfMeeting();
 
-            float hour1 = cal1.get(Calendar.HOUR) + cal1.get(Calendar.MINUTE);
-            float hour2 = cal2.get(Calendar.HOUR) + cal2.get(Calendar.MINUTE);
-
-            return (String.valueOf(hour1)).compareToIgnoreCase(String.valueOf(hour2));
+            return (cal1.compareTo(cal2));
         });
 
     }
 
     @Override
-    public List<String> getListPlaceAvailable(float startH, float endH) {
+    public List<String> getListPlaceAvailable(Calendar startH, Calendar endH) {
 
         List<String> listPlace = new ArrayList<>(PlaceCompany.getPlaceAvailable());
 
         for(int i = 0; i < meetings.size(); i++){
 
-            Calendar startHour = meetings.get(i).getStartHourOfMeeting();
-            Calendar endHour = meetings.get(i).getEndHourOfMeeting();
+            Calendar startHourLocal = meetings.get(i).getStartHourOfMeeting();
+            Calendar endHourLocal = meetings.get(i).getEndHourOfMeeting();
 
-            float f1 = startHour.get(Calendar.HOUR) + startHour.get(Calendar.MINUTE);
-            float f2 = endHour.get(Calendar.HOUR) + endHour.get(Calendar.MINUTE);
+            if((startH.getTimeInMillis() >= startHourLocal.getTimeInMillis() &&
+                    startH.getTimeInMillis() <= endHourLocal.getTimeInMillis()) ||
+                    (endH.getTimeInMillis() >= startHourLocal.getTimeInMillis() &&
+                            endH.getTimeInMillis() <= endHourLocal.getTimeInMillis())){
 
-            if((startH >= f1 && startH <= f2) || (endH >= f1 && endH <= f2)){
                 String place = meetings.get(i).getPlace();
 
                 for(int ii = 0 ; ii < listPlace.size(); ii ++){
@@ -78,7 +88,19 @@ public class DummyMeetingApiService implements MeetingApiService {
                 }
             }
         }
+
         return listPlace;
 
     }
+
+    @Override
+    public Meeting getMeetingToDisplay() {
+        return meetingToDisplay;
+    }
+
+    @Override
+    public void setMeetingToDisplay(Meeting meeting) {
+        meetingToDisplay = meeting;
+    }
+
 }

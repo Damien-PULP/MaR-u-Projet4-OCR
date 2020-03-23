@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.delombaertdamien.mareu">
 
     <application
@@ -10,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.ConfigureMeetingActivity"
-            android:label="@string/title_activity_configure_meeting"
-            ></activity>
-        <activity android:name=".controller.MainActivity">
+            android:name=".controller.Activity.DetailActivity"/>
+
+        <activity
+            android:name=".controller.Activity.ConfigureMeetingActivity"
+            android:label="@string/title_activity_configure_meeting" />
+        <activity android:name=".controller.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

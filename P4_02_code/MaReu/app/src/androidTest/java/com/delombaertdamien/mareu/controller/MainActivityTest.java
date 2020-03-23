@@ -11,6 +11,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.delombaertdamien.mareu.R;
+import com.delombaertdamien.mareu.controller.Activity.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

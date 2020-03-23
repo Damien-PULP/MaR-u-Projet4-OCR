@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item"
+    android:id="@+id/item_meeting"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -29,14 +29,17 @@
 
     <TextView
         android:id="@+id/item_metting_list_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_metting_item"
+        android:layout_marginHorizontal="@dimen/margin_text_metting_item"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="NOM DE LA REUNION"
+        android:textColor="@color/color_text_normal"
         android:textSize="@dimen/size_text_normal"
         android:textStyle="bold"
-        android:textColor="@color/color_text_normal"
-        android:text="NOM DE LA REUNION"
         app:layout_constraintBottom_toBottomOf="@+id/item_metting_list_icon"
+        app:layout_constraintEnd_toStartOf="@id/item_metting_list_delete_button"
         app:layout_constraintStart_toEndOf="@+id/item_metting_list_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,15 +47,16 @@
         android:id="@+id/item_metting_list_name_participant"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_metting_item"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="@dimen/margin_text_metting_item"
         android:layout_marginBottom="16dp"
         android:text="collaborators ..."
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/color_text_under"
         android:textSize="@dimen/size_text_normal"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_metting_list_delete_button"
         app:layout_constraintStart_toEndOf="@+id/item_metting_list_icon"
         app:layout_constraintTop_toBottomOf="@id/item_metting_list_name" />
 

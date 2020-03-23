@@ -1,7 +1,9 @@
 package com.delombaertdamien.mareu.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class Meeting {
 
@@ -13,6 +15,7 @@ public class Meeting {
     private String place;
 
     public Meeting(Integer id, String subject, List<String> contributors, Calendar hourOfMeeting, Calendar endHour, String place) {
+
         this.id = id;
         this.subject = subject;
         this.contributors = contributors;
@@ -58,5 +61,23 @@ public class Meeting {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    @Override
+    public boolean equals(Object mo) {
+        if (this == mo) return true;
+        if (mo == null || getClass() != mo.getClass()) return false;
+        Meeting mmMeeting = (Meeting) mo;
+        return Objects.equals(id, mmMeeting.id) &&
+                Objects.equals(subject, mmMeeting.subject) &&
+                Objects.equals(contributors, mmMeeting.contributors) &&
+                Objects.equals(startHourOfMeeting, mmMeeting.startHourOfMeeting) &&
+                Objects.equals(endHourOfMeeting, mmMeeting.endHourOfMeeting) &&
+                Objects.equals(place, mmMeeting.place);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, subject, contributors, startHourOfMeeting, endHourOfMeeting, place);
     }
 }

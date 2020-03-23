@@ -1,8 +1,6 @@
 package com.delombaertdamien.mareu.view;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.delombaertdamien.mareu.R;
-import com.delombaertdamien.mareu.controller.ConfigureMeetingActivity;
+import com.delombaertdamien.mareu.controller.Activity.ConfigureMeetingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,7 @@ public class AdaptorNonScrollListView extends BaseAdapter {
     private LayoutInflater mInflate;
     private List<Integer> nbItem;
     private ConfigureMeetingActivity mActivtity;
+
 
     public AdaptorNonScrollListView(Context context, List<String> list, ConfigureMeetingActivity activity) {
 

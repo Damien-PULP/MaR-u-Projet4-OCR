@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".controller.ConfigureMeetingActivity">
+    tools:context=".controller.Activity.ConfigureMeetingActivity">
 
 
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".controller.ConfigureMeetingActivity">
+        tools:context=".controller.Activity.ConfigureMeetingActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,7 +107,8 @@
                 android:text="définir l'heure de début"
                 android:background="@drawable/shape_with_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:padding="@dimen/little_padding"/>
 
             <TextView
                 style="@style/style_text_subTitle"
@@ -121,7 +122,8 @@
                 android:text="définir l'heure de fin"
                 android:background="@drawable/shape_with_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:padding="@dimen/little_padding"/>
 
             <Button
                 android:id="@+id/configure_activity_edit_text_valid_meeting"

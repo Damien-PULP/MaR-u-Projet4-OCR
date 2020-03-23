@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"/>
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.Fragment.DetailFragment">
+
 
     <TextView
         android:layout_width="match_parent"
@@ -17,6 +21,7 @@
         style="@style/style_text_subTitle_detail"
         />
     <TextView
+        android:id="@+id/fragment_detail_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/text_margin"
@@ -33,6 +38,7 @@
         style="@style/style_text_subTitle_detail"
         />
     <TextView
+        android:id="@+id/fragment_detail_contributor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/size_text_normal"
@@ -48,6 +54,7 @@
         style="@style/style_text_subTitle_detail"
         />
     <TextView
+        android:id="@+id/fragment_detail_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/size_text_normal"
@@ -63,6 +70,7 @@
         style="@style/style_text_subTitle_detail"
         />
     <TextView
+        android:id="@+id/fragment_detail_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/size_text_normal"
@@ -72,3 +80,4 @@
 
 
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>

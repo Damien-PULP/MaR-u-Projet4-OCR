@@ -24,6 +24,7 @@ public interface MeetingApiService {
      */
     void addMeeting(int id, String subject, String place, List<String> contributors, Calendar startHour, Calendar endHour);
 
+    Meeting getMeetingWithHashCode(Object obj);
     /**
      * This method delete a meeting in the list
      * @param meeting
@@ -45,5 +46,10 @@ public interface MeetingApiService {
      * @param endH
      * @return
      */
-    List<String> getListPlaceAvailable (float startH, float endH);
+    List<String> getListPlaceAvailable (Calendar startH, Calendar endH);
+
+
+    Meeting getMeetingToDisplay ();
+
+    void setMeetingToDisplay (Meeting meeting);
 }
