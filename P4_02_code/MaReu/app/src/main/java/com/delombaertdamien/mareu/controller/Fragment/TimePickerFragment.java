@@ -3,9 +3,7 @@ package com.delombaertdamien.mareu.controller.Fragment;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.TimePicker;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -18,12 +16,16 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * This is a simple Time Picker Dialog
+ * */
 public class TimePickerFragment extends DialogFragment {
 
+    //UI Components
     @BindView(R.id.configure_activity_button_set_start_clock)
     Button mButtonStartClock;
 
-    SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
+    private final SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -34,11 +36,7 @@ public class TimePickerFragment extends DialogFragment {
         int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
         int min = mCalendar.get(Calendar.MINUTE);
 
-        Log.d("TimePickerDialog", "heure du timePicker : " + hour + " : " + min);
-
-        TimePickerDialog timePicker = new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener) getActivity(), hour , min, true );
-
-        return timePicker;
+        return new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener) getActivity(), hour , min, true );
     }
 
 

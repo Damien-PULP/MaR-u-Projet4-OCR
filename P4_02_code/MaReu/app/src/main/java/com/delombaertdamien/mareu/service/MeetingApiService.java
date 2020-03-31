@@ -24,7 +24,13 @@ public interface MeetingApiService {
      */
     void addMeeting(int id, String subject, String place, List<String> contributors, Calendar startHour, Calendar endHour);
 
+    /**
+     * This method return a meeting by hashcode
+     * @param obj
+     * @return
+     */
     Meeting getMeetingWithHashCode(Object obj);
+
     /**
      * This method delete a meeting in the list
      * @param meeting
@@ -48,8 +54,15 @@ public interface MeetingApiService {
      */
     List<String> getListPlaceAvailable (Calendar startH, Calendar endH);
 
-
+    /**
+     * This method return the meeting to display
+     * @return
+     */
     Meeting getMeetingToDisplay ();
 
+    /**
+     * This method set the meeting to display
+     * @param meeting
+     */
     void setMeetingToDisplay (Meeting meeting);
 }

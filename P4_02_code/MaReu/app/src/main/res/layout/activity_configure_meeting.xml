@@ -8,8 +8,6 @@
     tools:context=".controller.Activity.ConfigureMeetingActivity">
 
 
-
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,54 +19,39 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/style_text_subTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sujet" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/configure_activity_edit_text_subject"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_with_border"
-                android:textSize="@dimen/size_text_normal"
-                android:hint="sujet ..."
-                android:padding="@dimen/padding_vertical_shape" />
+                android:layout_margin="10dp"
+                android:hint="Sujet ..."
+                app:endIconMode="clear_text">
 
-            <TextView
-                style="@style/style_text_subTitle"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/configure_activity_edit_text_contributor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Participant(s)" />
+                android:layout_margin="10dp"
+                android:hint="Participants ..."
+                app:endIconDrawable="@drawable/ic_person_add_black_24dp"
+                app:endIconMode="custom">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_with_border">
-
-                <EditText
-                    android:id="@+id/configure_activity_edit_text_contributor"
-                    android:layout_width="0dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="email@lamzlo.com"
-                    android:inputType="textWebEmailAddress"
-                    android:textSize="@dimen/size_text_normal"
-                    android:padding="@dimen/padding_vertical_shape"
-                    app:layout_constraintEnd_toStartOf="@id/configure_activity_button_valid_contributor"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/configure_activity_button_valid_contributor"
-                    android:layout_width="@dimen/size_icon_add_contributor"
-                    android:layout_height="@dimen/size_icon_add_contributor"
-                    android:layout_marginEnd="@dimen/margin_end_button_add_contributor"
-                    android:background="@drawable/ic_person_add_black_12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/configure_activity_edit_text_contributor"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.delombaertdamien.mareu.view.NonScrollListView
                 android:id="@+id/configure_activity_list_contributor"
@@ -76,64 +59,48 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_with_border" />
 
-            <TextView
-                style="@style/style_text_subTitle"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Local" />
+                android:layout_margin="10dp"
+                app:endIconMode="dropdown_menu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_with_border">
-                <androidx.appcompat.widget.AppCompatSpinner
+                <AutoCompleteTextView
                     android:id="@+id/configure_activity_spinner_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_vertical_spinner"
-                    android:minHeight="@dimen/padding_vertical_spinner"
-                    />
-            </LinearLayout>
+                    android:hint="Local ..."
+                    android:inputType="textAutoComplete" />
 
-            <TextView
-                style="@style/style_text_subTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Heure de début" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:textSize="@dimen/size_text_normal"
                 android:id="@+id/configure_activity_button_set_start_clock"
-                android:text="définir l'heure de début"
-                android:background="@drawable/shape_with_border"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/little_padding"/>
-
-            <TextView
-                style="@style/style_text_subTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Heure de début" />
+                android:layout_margin="10dp"
+                android:text="définir l'heure de début" />
 
             <Button
-                android:textSize="@dimen/size_text_normal"
                 android:id="@+id/configure_activity_button_set_end_clock"
-                android:text="définir l'heure de fin"
-                android:background="@drawable/shape_with_border"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/little_padding"/>
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_with_border"
+                android:text="définir l'heure de fin" />
 
             <Button
                 android:id="@+id/configure_activity_edit_text_valid_meeting"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_button_valid_meeting"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="AJOUTER"
-                android:textColor="@color/color_text_title"
-                android:textStyle="bold"
-                android:textSize="@dimen/size_text_title"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -6,14 +6,16 @@
     android:layout_height="match_parent">
     <FrameLayout
         android:id="@+id/frame_layout_activity_main"
-        android:layout_weight="30"
+        android:layout_weight="45"
         android:layout_width="0px"
+
         android:layout_height="match_parent"
         />
     <FrameLayout
         android:id="@+id/frame_layout_activity_detail"
-        android:layout_weight="70"
+        android:layout_weight="55"
         android:layout_width="0px"
+        android:background="@drawable/shape_with_border"
         android:layout_height="match_parent"
         />
 </LinearLayout>

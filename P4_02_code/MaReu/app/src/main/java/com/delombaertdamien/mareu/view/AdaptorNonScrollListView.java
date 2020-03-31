@@ -16,20 +16,19 @@ import java.util.List;
 
 public class AdaptorNonScrollListView extends BaseAdapter {
 
-    private Context mContext;
     private List<String> mEmailContributors;
-    private LayoutInflater mInflate;
     private List<Integer> nbItem;
-    private ConfigureMeetingActivity mActivtity;
 
+    private final LayoutInflater mInflate;
+
+    private final ConfigureMeetingActivity mActivity;
 
     public AdaptorNonScrollListView(Context context, List<String> list, ConfigureMeetingActivity activity) {
 
-        this.mContext = context;
         this.mEmailContributors = list;
         this.mInflate = LayoutInflater.from(context);
         nbItem = new ArrayList<>();
-        mActivtity = activity;
+        mActivity = activity;
     }
 
     @Override
@@ -52,20 +51,16 @@ public class AdaptorNonScrollListView extends BaseAdapter {
 
         nbItem.add(1);
         view = mInflate.inflate(R.layout.item_contributor, null);
-        //value
+
         String name = mEmailContributors.get(i);
-        //layout
+
         TextView nameText = view.findViewById(R.id.item_contributor_name);
         ImageButton deleteButton = view.findViewById(R.id.item_contributor_delete);
-        //set
+
         nameText.setText(name);
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mActivtity.removeAnContributor(name);
-                System.out.println("delete");
-            }
+        deleteButton.setOnClickListener(view1 -> {
+            mActivity.removeAnContributor(name);
         });
 
         return view;

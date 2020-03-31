@@ -5,14 +5,12 @@ import com.delombaertdamien.mareu.model.Meeting;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
  *  Implementation of ApiService
  */
 public class DummyMeetingApiService implements MeetingApiService {
-
 
     private List<Meeting> meetings = new ArrayList<>();
     private Meeting meetingToDisplay;
@@ -43,11 +41,13 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     @Override
     public void removeMeeting(Meeting meeting) {
+
         meetings.remove(meeting);
     }
 
     @Override
     public void getListWithFilterPlace() {
+
         Collections.sort(meetings, (t0, t1) -> t0.getPlace().compareToIgnoreCase(t1.getPlace()));
     }
 

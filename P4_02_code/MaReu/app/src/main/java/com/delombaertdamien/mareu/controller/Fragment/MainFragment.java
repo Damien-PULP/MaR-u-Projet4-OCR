@@ -2,36 +2,49 @@ package com.delombaertdamien.mareu.controller.Fragment;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.delombaertdamien.mareu.DI.DI;
 import com.delombaertdamien.mareu.R;
+import com.delombaertdamien.mareu.controller.Activity.ConfigureMeetingActivity;
 import com.delombaertdamien.mareu.controller.Activity.DetailActivity;
+import com.delombaertdamien.mareu.controller.Activity.MainActivity;
 import com.delombaertdamien.mareu.events.StartShowDetailEvent;
+import com.delombaertdamien.mareu.model.Meeting;
 import com.delombaertdamien.mareu.service.MeetingApiService;
+import com.delombaertdamien.mareu.view.AdaptorListView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends BaseFragment {
 
+    //UI Components
+    @BindView(R.id.floating_action_button_add_meeting)
+    FloatingActionButton mFabAddMeeting;
+    @BindView(R.id.list_meeting_main_activity)
+    RecyclerView mRecyclerView;
 
-    MeetingApiService mApiService = DI.getMettingApiService();
+    private AdaptorListView mAdaptor;
+
+    private final MeetingApiService mApiService = DI.getMeetingApiService();
 
     public MainFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     protected BaseFragment newInstance() {
@@ -40,27 +53,33 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected int getFragmentLayout() {
-        return 0;
+        return R.layout.fragment_main;
     }
 
     @Override
     protected void configureDesign() {
 
+        List<Meeting> mMeetings = mApiService.getMeetings();
+
+        mAdaptor = new AdaptorListView(mMeetings);
+        mRecyclerView.setAdapter(mAdaptor);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mFabAddMeeting.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ConfigureMeetingActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     @Override
     protected void updateDesign() {
-
+        refreshUI();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        return inflater.inflate(R.layout.fragment_main, container, false);
+    public void refreshUI() {
+        mAdaptor.notifyDataSetChanged();
     }
-
-
 
     @Override
     public void onStart() {
@@ -75,12 +94,15 @@ public class MainFragment extends BaseFragment {
     }
 
     @Subscribe
-    public void showDetail(StartShowDetailEvent event){
+    public void showDetail(StartShowDetailEvent event) {
 
         mApiService.setMeetingToDisplay(mApiService.getMeetingWithHashCode(event.getId()));
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
-        startActivity(intent);
+        if (getActivity().findViewById(R.id.frame_layout_activity_detail) == null) {
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            startActivity(intent);
+        }else{
+            ((MainActivity)getActivity()).refreshFragmentDetail();
+        }
     }
-
 
 }

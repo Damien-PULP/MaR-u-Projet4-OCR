@@ -4,44 +4,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.delombaertdamien.mareu.R;
 import com.delombaertdamien.mareu.controller.Fragment.DetailFragment;
-import com.delombaertdamien.mareu.controller.Fragment.MainFragment;
-import com.delombaertdamien.mareu.events.ShowDetailEvent;
-
-import org.greenrobot.eventbus.EventBus;
-
-import butterknife.BindView;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private DetailFragment detailFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar();
         configureAndShowFragment();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
 
     }
     @Override
@@ -50,16 +38,19 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void configureActionBar (){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
     private void configureAndShowFragment (){
 
-        detailFragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_activity_detail);
+        DetailFragment mDetailFragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_activity_detail);
 
-        if(detailFragment == null){
+        if(mDetailFragment == null){
 
-            detailFragment = new DetailFragment();
+            mDetailFragment = new DetailFragment();
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_layout_activity_detail, detailFragment)
+                    .add(R.id.frame_layout_activity_detail, mDetailFragment)
                     .commit();
 
         }

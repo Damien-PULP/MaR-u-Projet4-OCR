@@ -1,3 +1,5 @@
+<!--suppress ALL, AndroidDomInspection, AndroidDomInspection -->
+
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,21 +13,19 @@
     android:layout_height="match_parent"
     tools:context=".controller.Fragment.DetailFragment">
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="sujet de la réunion"
-        android:padding="@dimen/text_margin"
         android:background="@drawable/shape_with_border"
-        style="@style/style_text_subTitle_detail"
         />
+
     <TextView
         android:id="@+id/fragment_detail_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/text_margin"
-        android:textSize="@dimen/size_text_normal"
+
+
         android:text="ceci est le sujet de la réunion"
         />
 
@@ -33,49 +33,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="participants à la réunion"
-        android:padding="@dimen/text_margin"
+
         android:background="@drawable/shape_with_border"
-        style="@style/style_text_subTitle_detail"
+
         />
     <TextView
         android:id="@+id/fragment_detail_contributor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/size_text_normal"
+
         android:text="email@lamzlo.com, email@lamzlo.com, email@lamzlo.com, email@lamzlo.com"
-        android:padding="@dimen/text_margin"/>
+      />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="local à la réunion"
-        android:padding="@dimen/text_margin"
+
         android:background="@drawable/shape_with_border"
-        style="@style/style_text_subTitle_detail"
+
         />
     <TextView
         android:id="@+id/fragment_detail_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/size_text_normal"
+
         android:text="local A"
-        android:padding="@dimen/text_margin"/>
+      />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="heure de la réunion"
-        android:padding="@dimen/text_margin"
+
         android:background="@drawable/shape_with_border"
-        style="@style/style_text_subTitle_detail"
+
         />
     <TextView
         android:id="@+id/fragment_detail_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/size_text_normal"
         android:text="12H00 - 12H45"
-        android:padding="@dimen/text_margin"/>
+     />
 
 
 

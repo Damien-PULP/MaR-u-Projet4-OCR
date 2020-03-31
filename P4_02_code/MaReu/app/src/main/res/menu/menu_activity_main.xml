@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/search_filter_menu_activity_main"
-        android:icon="@drawable/ic_filter_list_white_24dp"
+        android:icon="@drawable/ic_filter_list_white_48dp"
         android:orderInCategory="2"
         android:title="filter"
         app:showAsAction="always|withText">
@@ -12,7 +12,7 @@
         <menu>
 
             <group
-                android:id="@+id/option_filter_list_metting"
+                android:id="@+id/option_filter_list_meeting"
                 android:checkableBehavior="single"
                 >
 

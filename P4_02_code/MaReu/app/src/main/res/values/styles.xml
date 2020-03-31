@@ -1,13 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
+        <!-- Problème API<item name="android:contextPopupMenuStyle">@style/Widget.MaterialComponents.PopupMenu.ContextMenu</item>-->
+        <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow</item>
+
     </style>
 
+<!--
     <style name="FloatingActionButton">
 
         <item name="android:clickable">true</item>
@@ -16,16 +22,16 @@
     </style>
 
 
-    <!-- TOOLBAR THEME -->
+
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!-- Color of the title text in the Toolbar -->
+
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="android:textColor">@color/color_text_title</item>
     </style>
 
-    <!-- TOOLBAR TITLE THEME -->
+
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">@dimen/size_text_title</item>
         <item name="android:textStyle">italic</item>
     </style>
 
@@ -49,4 +55,5 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
 
     </style>
+    -->
 </resources>

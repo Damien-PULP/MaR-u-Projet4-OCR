@@ -91,8 +91,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
-    <string name="msg_snackbar_email_adv">"L'adresse email doit se terminer par @lamzlo.com"</string>
+    <string name="msg_snackbar_email_adv">"L'adresse email doit se terminer par @lamzone.com"</string>
     <string name="email_lamzlo_com">EMAIL@LAMZLO.COM</string>
+    <string name="msg_set_end_time">définir l\'heure de fin</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
