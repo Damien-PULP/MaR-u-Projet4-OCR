@@ -15,7 +15,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +22,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.delombaertdamien.mareu.R;
@@ -61,7 +58,7 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
 
     private List<String> contributors = new ArrayList<>();
 
-    private String placeSelected;
+    private String placeSelected = "";
     private Calendar mStartHour;
     private Calendar mEndHour;
 
@@ -131,6 +128,8 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
         mListContributor.setAdapter(adaptor);
 
         refreshUISpinnerPlace();
+        mEndHour.add(Calendar.MINUTE, 45);
+        refreshHour();
 
         mButtonStartSetClock.setOnClickListener(view -> {
             isStartHour = true;
@@ -160,9 +159,9 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
     }
     private void refreshUISpinnerPlace (){
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_place, mApiService.getListPlaceAvailable(mStartHour, mEndHour));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item_place, mApiService.getListPlaceAvailable(mStartHour, mEndHour));
 
-        adapter.setDropDownViewResource(R.layout.spinner_item_place);
+        adapter.setDropDownViewResource(R.layout.list_item_place);
         mSpinnerPlace.setAdapter(adapter);
 
         /** if the place selected after time and time changed after place selected */
@@ -204,8 +203,8 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
     }
     private void refreshHour (){
 
-        mButtonStartSetClock.setText("La réunion commence à " + format.format(mStartHour.getTime()));
-        mButtonEndSetClock.setText("La réunion ce termine à " + format.format(mEndHour.getTime()));
+        mButtonStartSetClock.setText("Heure de début :  " + format.format(mStartHour.getTime()));
+        mButtonEndSetClock.setText("Heure de fin :      " + format.format(mEndHour.getTime()));
     }
 
     public void removeAnContributor (String contributor){
@@ -247,6 +246,20 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
             startActivity(mIntent);
         }else{
             showAlertWithMsg("Veuillez remplir tout les champs !");
+
+            if(subject.equals("")){
+                mTextSubject.setErrorEnabled(true);
+                mTextSubject.setError("Veuillez indiquer le sujet de la réunion");
+            }else{
+                mTextSubject.setErrorEnabled(false);
+            }
+
+            if(contributors.size() <= 0){
+                mTextContributor.setErrorEnabled(true);
+                mTextContributor.setError("Veuillez indiquer l'adresse email des participants");
+            }else{
+                mTextContributor.setErrorEnabled(false);
+            }
         }
     }
 

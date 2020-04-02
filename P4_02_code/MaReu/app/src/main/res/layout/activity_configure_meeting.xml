@@ -26,13 +26,21 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:hint="Sujet ..."
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_work_black_24dp"
+                app:startIconTint="@color/colorPrimary"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/configure_activity_edit_text_contributor"
@@ -42,7 +50,10 @@
                 android:layout_margin="10dp"
                 android:hint="Participants ..."
                 app:endIconDrawable="@drawable/ic_person_add_black_24dp"
-                app:endIconMode="custom">
+                app:endIconMode="custom"
+                app:startIconDrawable="@drawable/ic_contact_mail_blue_24dp"
+                app:startIconTint="@color/colorPrimary"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -52,36 +63,53 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.delombaertdamien.mareu.view.NonScrollListView
                 android:id="@+id/configure_activity_list_contributor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_with_border" />
+                android:layout_height="wrap_content" />
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:endIconMode="dropdown_menu"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                >
+                app:startIconDrawable="@drawable/ic_place_black_24dp"
+                app:startIconTint="@color/colorPrimary">
 
                 <AutoCompleteTextView
                     android:id="@+id/configure_activity_spinner_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Local ..."
-                    android:inputType="textAutoComplete" />
+                    android:inputType="textAutoComplete"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Heure de la réunion"
+                android:drawableLeft="@drawable/ic_access_time_blue_24dp"/>
             <Button
                 android:id="@+id/configure_activity_button_set_start_clock"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:text="définir l'heure de début" />
 
             <Button
@@ -93,8 +121,13 @@
                 android:background="@drawable/shape_with_border"
                 android:text="définir l'heure de fin" />
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
             <Button
                 android:id="@+id/configure_activity_edit_text_valid_meeting"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

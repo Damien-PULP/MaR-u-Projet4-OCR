@@ -11,69 +11,106 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.Fragment.DetailFragment">
+    tools:context=".controller.Fragment.DetailFragment"
+    android:layout_margin="@dimen/default_margin">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="sujet de la réunion"
-        android:background="@drawable/shape_with_border"
+        android:textStyle="bold"
+        style="@style/TextViewStyle"
         />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
 
     <TextView
         android:id="@+id/fragment_detail_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         android:text="ceci est le sujet de la réunion"
+        style="@style/TextViewStyle"
         />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="participants à la réunion"
-
-        android:background="@drawable/shape_with_border"
-
+        android:textStyle="bold"
+        style="@style/TextViewStyle"
         />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
+
     <TextView
         android:id="@+id/fragment_detail_contributor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:text="email@lamzlo.com, email@lamzlo.com, email@lamzlo.com, email@lamzlo.com"
+        style="@style/TextViewStyle"
       />
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="local à la réunion"
-
-        android:background="@drawable/shape_with_border"
-
+        android:textStyle="bold"
+        style="@style/TextViewStyle"
         />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
     <TextView
         android:id="@+id/fragment_detail_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:text="local A"
+        style="@style/TextViewStyle"
       />
-
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="heure de la réunion"
-
-        android:background="@drawable/shape_with_border"
-
+        android:textStyle="bold"
+        style="@style/TextViewStyle"
         />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginVertical="4dp"/>
     <TextView
         android:id="@+id/fragment_detail_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="12H00 - 12H45"
+        style="@style/TextViewStyle"
      />
 
 

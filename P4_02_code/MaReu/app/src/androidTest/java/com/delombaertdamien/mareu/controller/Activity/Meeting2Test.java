@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
@@ -30,6 +31,7 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -38,13 +40,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CreateMeetingTest {
+public class Meeting2Test {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void createMeetingTest() {
+    public void meeting2Test() {
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.floating_action_button_add_meeting),
                         childAtPosition(
@@ -55,73 +57,106 @@ public class CreateMeetingTest {
                         isDisplayed()));
         floatingActionButton.perform(click());
 
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.configure_activity_edit_text_subject),
+        ViewInteraction textInputEditText = onView(
+                allOf(childAtPosition(
                         childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.core.widget.NestedScrollView")),
-                                        0),
-                                1),
+                                withId(R.id.configure_activity_edit_text_subject),
+                                0),
+                        0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("commi"), closeSoftKeyboard());
+        textInputEditText.perform(replaceText("d"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.configure_activity_edit_text_contributor),
+        ViewInteraction textInputEditText2 = onView(
+                allOf(childAtPosition(
+                        childAtPosition(
+                                withId(R.id.configure_activity_edit_text_contributor),
+                                0),
+                        0),
+                        isDisplayed()));
+        textInputEditText2.perform(replaceText("m@lamzone.com"), closeSoftKeyboard());
+
+        ViewInteraction checkableImageButton = onView(
+                allOf(withId(R.id.text_input_end_icon),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        3),
+                                        withClassName(is("android.widget.FrameLayout")),
+                                        2),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("marc@lamzlo.com"), closeSoftKeyboard());
+        checkableImageButton.perform(click());
 
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.configure_activity_button_valid_contributor),
+        pressBack();
+
+        ViewInteraction checkableImageButton2 = onView(
+                allOf(withId(R.id.text_input_end_icon), withContentDescription("Show dropdown menu"),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        3),
-                                1),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.configure_activity_spinner_place),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        6),
+                                        withClassName(is("android.widget.FrameLayout")),
+                                        2),
                                 0),
                         isDisplayed()));
-        appCompatSpinner.perform(click());
+        checkableImageButton2.perform(click());
 
-        DataInteraction appCompatTextView = onData(anything())
+        DataInteraction materialTextView = onData(anything())
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
                 .atPosition(2);
-        appCompatTextView.perform(click());
+        materialTextView.perform(click());
 
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.configure_activity_button_set_start_clock), withText("définir l'heure de début"),
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.configure_activity_button_set_start_clock), withText("Heure de début :  15:41"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.core.widget.NestedScrollView")),
                                         0),
                                 8),
                         isDisplayed()));
-        appCompatButton2.perform(click());
+        materialButton.perform(click());
 
-        ViewInteraction appCompatButton3 = onView(
+        ViewInteraction numericTextView = onView(
+                allOf(withClassName(is("com.android.internal.widget.NumericTextView")), withText("43"),
+                        childAtPosition(
+                                allOf(withClassName(is("android.widget.RelativeLayout")),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        numericTextView.perform(click());
+
+        ViewInteraction numericTextView2 = onView(
+                allOf(withClassName(is("com.android.internal.widget.NumericTextView")), withText("43"),
+                        childAtPosition(
+                                allOf(withClassName(is("android.widget.RelativeLayout")),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        numericTextView2.perform(click());
+
+        ViewInteraction numericTextView3 = onView(
+                allOf(withClassName(is("com.android.internal.widget.NumericTextView")), withText("43"),
+                        childAtPosition(
+                                allOf(withClassName(is("android.widget.RelativeLayout")),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        numericTextView3.perform(click());
+
+        ViewInteraction materialButton2 = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 3)));
-        appCompatButton3.perform(scrollTo(), click());
+        materialButton2.perform(scrollTo(), click());
 
-        ViewInteraction appCompatButton4 = onView(
+        ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.configure_activity_edit_text_valid_meeting), withText("AJOUTER"),
                         childAtPosition(
                                 childAtPosition(
@@ -129,18 +164,29 @@ public class CreateMeetingTest {
                                         0),
                                 11),
                         isDisplayed()));
-        appCompatButton4.perform(click());
+        materialButton3.perform(click());
 
         ViewInteraction viewGroup = onView(
                 allOf(withId(R.id.item_meeting),
                         childAtPosition(
                                 allOf(withId(R.id.list_meeting_main_activity),
                                         childAtPosition(
-                                                IsInstanceOf.instanceOf(android.widget.ScrollView.class),
+                                                IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
                                                 0)),
                                 0),
                         isDisplayed()));
         viewGroup.check(matches(isDisplayed()));
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.item_meeting_list_name), withText("Local C - 15:30 - 16:26 , d"),
+                        childAtPosition(
+                                allOf(withId(R.id.item_meeting),
+                                        childAtPosition(
+                                                withId(R.id.list_meeting_main_activity),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        textView.check(matches(withText("Local C - 15:30 - 16:26 , d")));
     }
 
     private static Matcher<View> childAtPosition(
