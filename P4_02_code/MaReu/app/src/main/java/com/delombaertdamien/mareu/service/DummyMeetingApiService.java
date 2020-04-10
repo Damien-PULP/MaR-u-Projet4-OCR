@@ -74,10 +74,15 @@ public class DummyMeetingApiService implements MeetingApiService {
             Calendar startHourLocal = meetings.get(i).getStartHourOfMeeting();
             Calendar endHourLocal = meetings.get(i).getEndHourOfMeeting();
 
+
+
+
             if((startH.getTimeInMillis() >= startHourLocal.getTimeInMillis() &&
                     startH.getTimeInMillis() <= endHourLocal.getTimeInMillis()) ||
                     (endH.getTimeInMillis() >= startHourLocal.getTimeInMillis() &&
-                            endH.getTimeInMillis() <= endHourLocal.getTimeInMillis())){
+                            endH.getTimeInMillis() <= endHourLocal.getTimeInMillis()) ||
+                    (startH.getTimeInMillis() < startHourLocal.getTimeInMillis() && endH.getTimeInMillis() > endHourLocal.getTimeInMillis())
+            ){
 
                 String place = meetings.get(i).getPlace();
 
