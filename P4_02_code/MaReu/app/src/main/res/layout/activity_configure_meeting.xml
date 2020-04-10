@@ -22,6 +22,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/configure_activity_edit_text_subject"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconContentDescription="buttonEndIconContributor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -49,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:hint="Participants ..."
+                app:endIconContentDescription="edit_text_contributor"
                 app:endIconDrawable="@drawable/ic_person_add_black_24dp"
                 app:endIconMode="custom"
                 app:startIconDrawable="@drawable/ic_contact_mail_blue_24dp"
@@ -88,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Local ..."
-                    android:inputType="textAutoComplete"
+                    android:editable="false"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

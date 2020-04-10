@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
 
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/onSurface</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
@@ -11,6 +12,7 @@
         <!-- Problème API<item name="android:contextPopupMenuStyle">@style/Widget.MaterialComponents.PopupMenu.ContextMenu</item>-->
         <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
+
     </style>
 
     <style name="TextViewStyle" parent="android:Widget.TextView">

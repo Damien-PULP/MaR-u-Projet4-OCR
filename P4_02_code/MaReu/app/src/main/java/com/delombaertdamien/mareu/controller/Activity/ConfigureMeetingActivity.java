@@ -11,14 +11,13 @@ import com.delombaertdamien.mareu.service.MeetingApiService;
 import com.delombaertdamien.mareu.view.AdaptorNonScrollListView;
 import com.delombaertdamien.mareu.view.NonScrollListView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -33,12 +32,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ConfigureMeetingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, TimePickerDialog.OnTimeSetListener {
+public class ConfigureMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     //UI Components
     @BindView(R.id.configure_activity_edit_text_subject)
@@ -85,10 +85,6 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
 
     }
 
-    public void onItemClick (AdapterView<?> parent, View view, int position, long id){
-        placeSelected = parent.getItemAtPosition(position).toString();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -122,7 +118,7 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
 
     private void configureUI (){
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         AdaptorNonScrollListView adaptor = new AdaptorNonScrollListView(this, contributors, this);
         mListContributor.setAdapter(adaptor);
@@ -134,7 +130,7 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
         mButtonStartSetClock.setOnClickListener(view -> {
             isStartHour = true;
             DialogFragment fragmentClock = new TimePickerFragment();
-            fragmentClock.show(getSupportFragmentManager(), "start time picker");
+            fragmentClock.show(getSupportFragmentManager(), "start_hour_clock_fragment");
         });
         mButtonEndSetClock.setOnClickListener(view -> {
             isStartHour = false;
@@ -167,15 +163,15 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
         /** if the place selected after time and time changed after place selected */
         boolean isAvailable = false;
         for(int i = 0; i < adapter.getCount(); i++){
-            if(mSpinnerPlace.getText().equals(adapter.getItem(i))){
+            if(mSpinnerPlace.getText().toString().equals(adapter.getItem(i))){
                 isAvailable = true;
+                placeSelected = mSpinnerPlace.getText().toString();
             }
         }
         if(!isAvailable){
             mSpinnerPlace.setText("");
         }
 
-        mSpinnerPlace.setOnItemClickListener(this);
     }
 
     @Override
@@ -237,6 +233,7 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements Adapt
     private void validMeeting (){
 
         String subject = mTextSubject.getEditText().getText().toString();
+        refreshUISpinnerPlace();
 
         if(!subject.equals("") && contributors.size() > 0 && !placeSelected.equals("")){
 
