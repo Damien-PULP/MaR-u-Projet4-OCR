@@ -1,5 +1,6 @@
 package com.delombaertdamien.mareu.service;
 
+import com.delombaertdamien.mareu.model.Filter;
 import com.delombaertdamien.mareu.model.Meeting;
 
 import java.util.Calendar;
@@ -12,6 +13,8 @@ public interface MeetingApiService {
      * @return
      */
     List<Meeting> getMeetings();
+
+    List<Meeting> getMeetingsToShow ();
 
     /**
      * This method add a meeting in the list
@@ -38,14 +41,9 @@ public interface MeetingApiService {
     void removeMeeting(Meeting meeting);
 
     /**
-     * This method sort the list trough place
+     * This method sort the list trough place & hour with Filter
      */
-    void getListWithFilterPlace ();
-
-    /**
-     * This method sort the list trough hour
-     */
-    void getListWithFilterHour ();
+    void getListWithFilter(Filter filter);
 
     /**
      * This method return the list of place available when a hour

@@ -11,19 +11,39 @@
 
         <menu>
 
-            <group
-                android:id="@+id/option_filter_list_meeting"
-                android:checkableBehavior="single"
-                >
+            <group>
+                <item
+                    android:checkable="false"
+                    android:enabled="false"
+                    android:title="Filtre les réunions en fonction du local et de l'heure"/>
 
                 <item
                     android:id="@+id/option_1_filter"
-                    android:onClick="onOptionFilterListItemClick"
-                    android:title="Par heure"/>
+                    android:icon="@drawable/ic_access_time_blue_24dp"
+                    android:title="Par heure">
+
+                    <menu>
+
+                        <group
+                            android:id="@+id/option_filter_1_group"
+                            android:checkableBehavior="all">
+
+                        </group>
+                    </menu>
+                </item>
                 <item
                     android:id="@+id/option_2_filter"
-                    android:onClick="onOptionFilterListItemClick"
-                    android:title="Par local"/>
+                    android:icon="@drawable/ic_place_black_24dp"
+                    android:title="Par local">
+
+                    <menu>
+
+                        <group
+                            android:id="@+id/option_filter_2_group"
+                            android:checkableBehavior="all">
+                        </group>
+                    </menu>
+                </item>
             </group>
         </menu>
     </item>

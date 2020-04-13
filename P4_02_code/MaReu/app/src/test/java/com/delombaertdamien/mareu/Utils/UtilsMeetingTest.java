@@ -5,7 +5,6 @@ import android.graphics.Color;
 import com.delombaertdamien.mareu.model.Meeting;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;

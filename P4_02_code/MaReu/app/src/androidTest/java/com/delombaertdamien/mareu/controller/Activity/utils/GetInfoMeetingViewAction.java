@@ -1,12 +1,10 @@
 package com.delombaertdamien.mareu.controller.Activity.utils;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.matcher.ViewMatchers;
 
 import com.delombaertdamien.mareu.R;
 
@@ -20,7 +18,6 @@ public class GetInfoMeetingViewAction implements ViewAction {
 
     private String place;
     private Calendar calStart;
-    private Calendar calEnd;
     private String primaryText;
     private String secondaryText;
 
@@ -44,32 +41,18 @@ public class GetInfoMeetingViewAction implements ViewAction {
         primaryText = ((TextView) view.findViewById(R.id.item_meeting_list_name)).getText().toString();
         secondaryText = ((TextView) view.findViewById(R.id.item_meeting_list_name_participant)).getText().toString();
         //Place
-        String placeOfMeeting = textMeeting.substring(6,7);
-        place = placeOfMeeting;
+        place = textMeeting.substring(6,7);
         //Hour
         calStart = (Calendar)format.getCalendar().clone();
-        calEnd = (Calendar) format.getCalendar().clone();
 
-        int startHour = Integer.valueOf(textMeeting.substring(10,12));
-        int startMin = Integer.valueOf(textMeeting.substring(13,15));
+        int startHour = Integer.parseInt(textMeeting.substring(10,12));
+        int startMin = Integer.parseInt(textMeeting.substring(13,15));
 
-        int endHour = Integer.valueOf(textMeeting.substring(18,20));
-        int endMin = Integer.valueOf(textMeeting.substring(21,23));
+        int endHour = Integer.parseInt(textMeeting.substring(18,20));
+        int endMin = Integer.parseInt(textMeeting.substring(21,23));
 
         calStart.set(Calendar.HOUR_OF_DAY, startHour);
         calStart.set(Calendar.MINUTE, startMin);
-
-        calEnd.set(Calendar.HOUR_OF_DAY, endHour);
-        calEnd.set(Calendar.MINUTE, endMin);
-
-    }
-
-    public String getPlace (){
-        return place;
-    }
-
-    public Calendar getStartCalendar (){
-        return calStart;
     }
 
     public String getPrimaryText (){

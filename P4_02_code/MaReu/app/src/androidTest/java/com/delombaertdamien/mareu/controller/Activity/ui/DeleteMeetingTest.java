@@ -26,13 +26,11 @@ import static com.delombaertdamien.mareu.controller.Activity.utils.RecyclerViewI
 @RunWith(AndroidJUnit4.class)
 public class DeleteMeetingTest {
 
-    private MeetingApiService mApiService;
-    private MainActivity activity;
     private int ITEMS_COUNT = 0;
 
-    private class MyTestRule<T extends Activity> extends ActivityTestRule<T> {
+    public class MyTestRule<T extends Activity> extends ActivityTestRule<T> {
 
-        public MyTestRule(Class<T> activityClass) {
+        MyTestRule(Class<T> activityClass) {
             super(activityClass);
         }
 
@@ -40,7 +38,7 @@ public class DeleteMeetingTest {
         protected void beforeActivityLaunched() {
             super.beforeActivityLaunched();
 
-            MeetingApiService Api = DI.getMeetingApiService();
+            MeetingApiService Api = DI.getNewInstanceApiService();
 
             Meeting mMeeting = UtilsMeeting.getAMeeting();
             Api.addMeeting(mMeeting.getId(), mMeeting.getSubject(), mMeeting.getPlace(), mMeeting.getContributors(), mMeeting.getStartHourOfMeeting(), mMeeting.getEndHourOfMeeting());
@@ -48,15 +46,14 @@ public class DeleteMeetingTest {
     }
 
     @Rule
-    public MyTestRule<MainActivity> mActivityTestRule = new MyTestRule<>(MainActivity.class);
+    public final MyTestRule<MainActivity> mActivityTestRule = new MyTestRule<>(MainActivity.class);
 
     @Before
     public void setUp(){
 
-        activity = mActivityTestRule.getActivity();
-        mApiService = DI.getMeetingApiService();
+        MeetingApiService mMApiService = DI.getMeetingApiService();
 
-        ITEMS_COUNT = mApiService.getMeetings().size();
+        ITEMS_COUNT = mMApiService.getMeetings().size();
     }
 
     @Test

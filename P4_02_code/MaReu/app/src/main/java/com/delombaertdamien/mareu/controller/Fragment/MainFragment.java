@@ -7,8 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-
 import com.delombaertdamien.mareu.DI.DI;
 import com.delombaertdamien.mareu.R;
 import com.delombaertdamien.mareu.controller.Activity.ConfigureMeetingActivity;
@@ -59,7 +57,7 @@ public class MainFragment extends BaseFragment {
     @Override
     protected void configureDesign() {
 
-        List<Meeting> mMeetings = mApiService.getMeetings();
+        List<Meeting> mMeetings = mApiService.getMeetingsToShow();
 
         mAdaptor = new AdaptorListView(mMeetings);
         mRecyclerView.setAdapter(mAdaptor);

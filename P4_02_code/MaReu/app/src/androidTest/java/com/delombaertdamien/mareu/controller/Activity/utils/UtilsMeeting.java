@@ -1,7 +1,6 @@
 package com.delombaertdamien.mareu.controller.Activity.utils;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.delombaertdamien.mareu.model.Meeting;
 

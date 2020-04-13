@@ -59,9 +59,7 @@ public class AdaptorNonScrollListView extends BaseAdapter {
 
         nameText.setText(name);
 
-        deleteButton.setOnClickListener(view1 -> {
-            mActivity.removeAnContributor(name);
-        });
+        deleteButton.setOnClickListener(view1 -> mActivity.removeAnContributor(name));
 
         return view;
     }

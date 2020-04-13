@@ -2,6 +2,7 @@ package com.delombaertdamien.mareu;
 
 import com.delombaertdamien.mareu.DI.DI;
 import com.delombaertdamien.mareu.Utils.UtilsMeetingTest;
+import com.delombaertdamien.mareu.model.Filter;
 import com.delombaertdamien.mareu.model.Meeting;
 import com.delombaertdamien.mareu.service.MeetingApiService;
 
@@ -11,13 +12,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 
 @RunWith(JUnit4.class)
 public class MeetingServiceTest {
@@ -96,11 +94,15 @@ public class MeetingServiceTest {
         mApiService.addMeeting(listMeeting.get(0).getId(), listMeeting.get(0).getSubject(), listMeeting.get(0).getPlace(), listMeeting.get(0).getContributors(), listMeeting.get(0).getStartHourOfMeeting(), listMeeting.get(0).getEndHourOfMeeting());
         mApiService.addMeeting(listMeeting.get(1).getId(), listMeeting.get(1).getSubject(), listMeeting.get(1).getPlace(), listMeeting.get(1).getContributors(), listMeeting.get(1).getStartHourOfMeeting(), listMeeting.get(1).getEndHourOfMeeting());
         mApiService.addMeeting(listMeeting.get(2).getId(), listMeeting.get(2).getSubject(), listMeeting.get(2).getPlace(), listMeeting.get(2).getContributors(), listMeeting.get(2).getStartHourOfMeeting(), listMeeting.get(2).getEndHourOfMeeting());
-        mApiService.getListWithFilterPlace();
-        List<Meeting> listSoredByPlace = mApiService.getMeetings();
-        Collections.sort(listMeeting, (t0, t1) -> t0.getPlace().compareToIgnoreCase(t1.getPlace()));
-        //Then : check if the list is equals
-        assertThat(listMeeting, is(listSoredByPlace));
+
+        Filter filter = new Filter();
+        filter.addPlace("A");
+
+        mApiService.getListWithFilter(filter);
+
+        List<Meeting> listFilterByPlaceA = mApiService.getMeetingsToShow();
+
+        assertEquals(listFilterByPlaceA.size(), 2);
     }
 
     //TODO CHECK FIXED
@@ -112,11 +114,15 @@ public class MeetingServiceTest {
         mApiService.addMeeting(listMeeting.get(0).getId(), listMeeting.get(0).getSubject(), listMeeting.get(0).getPlace(), listMeeting.get(0).getContributors(), listMeeting.get(0).getStartHourOfMeeting(), listMeeting.get(0).getEndHourOfMeeting());
         mApiService.addMeeting(listMeeting.get(1).getId(), listMeeting.get(1).getSubject(), listMeeting.get(1).getPlace(), listMeeting.get(1).getContributors(), listMeeting.get(1).getStartHourOfMeeting(), listMeeting.get(1).getEndHourOfMeeting());
         mApiService.addMeeting(listMeeting.get(2).getId(), listMeeting.get(2).getSubject(), listMeeting.get(2).getPlace(), listMeeting.get(2).getContributors(), listMeeting.get(2).getStartHourOfMeeting(), listMeeting.get(2).getEndHourOfMeeting());
-        mApiService.getListWithFilterHour();
-        List<Meeting> listSoredByPlace = mApiService.getMeetings();
-        Collections.sort(listMeeting, (t0, t1) -> t0.getStartHourOfMeeting().compareTo(t1.getStartHourOfMeeting()));
-        //Then : check if the list is equals
-        assertThat(listMeeting, is(listSoredByPlace));
+
+        Filter filter = new Filter();
+        filter.addHour(8);
+
+        mApiService.getListWithFilter(filter);
+
+        List<Meeting> listFilterByPlaceA = mApiService.getMeetingsToShow();
+
+        assertEquals(listFilterByPlaceA.size(), 2);
     }
 
     @Test

@@ -32,25 +32,18 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withTagKey;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.delombaertdamien.mareu.controller.Activity.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class CreateMeetingTest {
-
-    private String meetingPrimaryText;
-    private String meetingSecondaryText;
 
     private static final SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
@@ -84,7 +77,7 @@ public class CreateMeetingTest {
 
         //Set contributor : contributor@lamzone.com
         String contributor = "contributor@lamzone.com";
-        meetingSecondaryText = " " +contributor;
+        String mMeetingSecondaryText = " " + contributor;
         ViewInteraction textInputEditText2 = onView(
                 allOf(childAtPosition(
                         childAtPosition(
@@ -104,14 +97,11 @@ public class CreateMeetingTest {
         //Set clock : actual clock
         Calendar startHourCal = (Calendar)format.getCalendar().clone();
         Calendar endHourCal = (Calendar)format.getCalendar().clone();
+        endHourCal.add(Calendar.MINUTE, 45);
 
         String hour = format.format(startHourCal.getTime()) + " - " + format.format(endHourCal.getTime());
 
         onView(withId(R.id.configure_activity_button_set_start_clock)).perform(click());
-
-        onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
-
-        onView(withId(R.id.configure_activity_button_set_end_clock)).perform(click());
 
         onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
 
@@ -149,14 +139,14 @@ public class CreateMeetingTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, getInfo));
 
 
-        meetingPrimaryText = "Local " + place + " - " + hour + " , " + subject;
+        String mMeetingPrimaryText = "Local " + place + " - " + hour + " , " + subject;
 
         String primaryText = getInfo.getPrimaryText();
         String secondaryText = getInfo.getSecondaryText();
 
         //Check if the information is true
-        assertEquals(primaryText, (meetingPrimaryText));
-        assertEquals(secondaryText, (meetingSecondaryText));
+        assertEquals(primaryText, (mMeetingPrimaryText));
+        assertEquals(secondaryText, (mMeetingSecondaryText));
 
     }
 

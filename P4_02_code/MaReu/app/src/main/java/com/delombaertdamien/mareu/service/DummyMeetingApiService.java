@@ -1,10 +1,10 @@
 package com.delombaertdamien.mareu.service;
 
+import com.delombaertdamien.mareu.model.Filter;
 import com.delombaertdamien.mareu.model.Meeting;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,11 +13,17 @@ import java.util.List;
 public class DummyMeetingApiService implements MeetingApiService {
 
     private List<Meeting> meetings = new ArrayList<>();
+    private List<Meeting> meetingsToShow = new ArrayList<>();
     private Meeting meetingToDisplay;
 
     @Override
     public List<Meeting> getMeetings() {
         return meetings;
+    }
+
+    @Override
+    public List<Meeting> getMeetingsToShow() {
+        return meetingsToShow;
     }
 
     @Override
@@ -43,25 +49,29 @@ public class DummyMeetingApiService implements MeetingApiService {
     public void removeMeeting(Meeting meeting) {
 
         meetings.remove(meeting);
+        /** remove in list display */
+        for(int i = 0; i < meetingsToShow.size(); i++){
+            if(meeting.equals(meetingsToShow.get(i))){
+                meetingsToShow.remove(i);
+            }
+        }
+        if(meeting.equals(meetingToDisplay))
+            meetingToDisplay = null;
     }
 
     @Override
-    public void getListWithFilterPlace() {
+    public void getListWithFilter(Filter filter) {
+        meetingsToShow.clear();
 
-        Collections.sort(meetings, (t0, t1) -> t0.getPlace().compareToIgnoreCase(t1.getPlace()));
-    }
+        for(int i = 0; i < meetings.size(); i++){
+            Meeting meeting = meetings.get(i);
+            boolean isInHour = filter.isHourInFilter(meeting.getStartHourOfMeeting().get(Calendar.HOUR_OF_DAY), meeting.getEndHourOfMeeting().get(Calendar.HOUR_OF_DAY));
+            boolean isInPlace = filter.isPlaceInFilter(meeting.getPlace());
 
-    @Override
-    public void getListWithFilterHour() {
-
-        Collections.sort(meetings, (t0, t1) -> {
-
-            Calendar cal1 = t0.getStartHourOfMeeting();
-            Calendar cal2 = t1.getStartHourOfMeeting();
-
-            return (cal1.compareTo(cal2));
-        });
-
+            if(isInHour && isInPlace){
+                meetingsToShow.add(meeting);
+            }
+        }
     }
 
     @Override

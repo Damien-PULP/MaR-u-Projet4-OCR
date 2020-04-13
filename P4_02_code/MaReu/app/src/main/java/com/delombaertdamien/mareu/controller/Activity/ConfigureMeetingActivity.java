@@ -11,7 +11,6 @@ import com.delombaertdamien.mareu.service.MeetingApiService;
 import com.delombaertdamien.mareu.view.AdaptorNonScrollListView;
 import com.delombaertdamien.mareu.view.NonScrollListView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -182,16 +181,17 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements TimeP
             mStartHour.set(Calendar.HOUR_OF_DAY, hour);
             mStartHour.set(Calendar.MINUTE, min);
 
-            if(mButtonEndSetClock.getText().equals("définir l'heure de fin")){
-
-                mEndHour.setTime(mStartHour.getTime());
-                mEndHour.add(Calendar.MINUTE, 45);
-            }
-
         }else{
 
             mEndHour.set(Calendar.HOUR_OF_DAY, hour);
             mEndHour.set(Calendar.MINUTE, min);
+
+            if(mEndHour.getTimeInMillis() <= mStartHour.getTimeInMillis()){
+                showAlertWithMsg("Veuillez entrer des heures valide");
+                mEndHour.set(Calendar.HOUR_OF_DAY, mStartHour.get(Calendar.HOUR_OF_DAY));
+                mEndHour.set(Calendar.MINUTE, mStartHour.get(Calendar.MINUTE));
+                mEndHour.add(Calendar.MINUTE, 45);
+            }
         }
         refreshHour();
         refreshUISpinnerPlace();
@@ -251,12 +251,6 @@ public class ConfigureMeetingActivity extends AppCompatActivity implements TimeP
                 mTextSubject.setErrorEnabled(false);
             }
 
-            if(contributors.size() <= 0){
-                mTextContributor.setErrorEnabled(true);
-                mTextContributor.setError("Veuillez indiquer l'adresse email des participants");
-            }else{
-                mTextContributor.setErrorEnabled(false);
-            }
         }
     }
 

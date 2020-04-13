@@ -53,13 +53,11 @@ public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        Meeting mMeeting = DI.getMeetingApiService().getMeetings().get(position);
+        Meeting mMeeting = DI.getMeetingApiService().getMeetingsToShow().get(position);
 
         holder.imgIcon.setColorFilter(mMeeting.getId());
 
-        holder.item.setOnClickListener(view -> {
-            EventBus.getDefault().post(new StartShowDetailEvent(mMeeting.hashCode()));
-        });
+        holder.item.setOnClickListener(view -> EventBus.getDefault().post(new StartShowDetailEvent(mMeeting.hashCode())));
 
         String startHourTxt = format.format(mMeeting.getStartHourOfMeeting().getTime());
         String endHourTxt = format.format(mMeeting.getEndHourOfMeeting().getTime());
@@ -75,7 +73,6 @@ public class AdaptorListView extends RecyclerView.Adapter<ViewHolder> {
         holder.buttonDelete.setOnClickListener(view -> {
             notifyDataSetChanged();
             mApiService.removeMeeting(mMeeting);
-
         });
 
     }

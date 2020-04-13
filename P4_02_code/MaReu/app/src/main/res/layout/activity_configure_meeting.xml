@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Heure de la réunion"
-                android:drawableLeft="@drawable/ic_access_time_blue_24dp"/>
+                android:drawableStart="@drawable/ic_access_time_blue_24dp"/>
             <Button
                 android:id="@+id/configure_activity_button_set_start_clock"
                 style="?attr/materialButtonOutlinedStyle"

@@ -2,7 +2,6 @@ package com.delombaertdamien.mareu.controller.Activity.ui;
 
 import android.app.Activity;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -11,7 +10,6 @@ import androidx.test.rule.ActivityTestRule;
 import com.delombaertdamien.mareu.DI.DI;
 import com.delombaertdamien.mareu.R;
 import com.delombaertdamien.mareu.controller.Activity.MainActivity;
-import com.delombaertdamien.mareu.controller.Activity.utils.DeleteViewAction;
 import com.delombaertdamien.mareu.controller.Activity.utils.UtilsMeeting;
 import com.delombaertdamien.mareu.model.Meeting;
 import com.delombaertdamien.mareu.service.MeetingApiService;
@@ -41,7 +39,7 @@ public class ShowMeetingTest {
 
     private class MyTestRule<T extends Activity> extends ActivityTestRule<T> {
 
-        public MyTestRule(Class<T> activityClass) {
+        MyTestRule(Class<T> activityClass) {
             super(activityClass);
         }
 
