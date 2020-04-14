@@ -8,7 +8,7 @@ This is MaRéu, the project 4 of OCR - Developper android
 ```
 $ cd Path depot
 $ git init 
-$ git remote add ENTREVOISIN https://github.com/Damien-PULP/MaR-u-Projet4-OCR.git
+$ git remote add MAREU https://github.com/Damien-PULP/MaR-u-Projet4-OCR.git
 $ git clone https://github.com/Damien-PULP/MaR-u-Projet4-OCR.git
 ```
 ![alt text](P4_screenshot/1_downloadProject_gitBash.png)
